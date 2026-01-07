@@ -1,0 +1,13 @@
+
+## الگوریتم Vensim
+```python
+def hybrid_simulation():
+    J, S, U, C, L = 0.62, 0.70, 0.25, 0.68, 0.35
+    for t in range(50):
+        # R-loop: ren + تحول‌گرا
+        L = 0.35*J + 0.28*S + 0.22*LMX
+        # B-loop: شوری امام علی
+        C += 0.18*(L + shura - U) * 0.1
+        if S > 0.85 and U < 0.12:
+            return f"موفق: t={t}"
+    return "نیاز به تنظیم"
