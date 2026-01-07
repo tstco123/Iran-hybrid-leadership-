@@ -1,0 +1,19 @@
+iran-hybrid-leadership/
+├── README.md                 # Main project overview
+├── docs/
+│   ├── fa/                   # Persian documentation
+│   │   ├── whitepaper.md     # White paper (Persian)
+│   │   ├── implementation.md # Practical implementation guide
+│   │   └── kpi-dashboard.md  # KPI monitoring guide
+│   ├── en/                   # English documentation
+│   └── api/                  # Model API documentation
+├── src/
+│   ├── vensim-models/        # Vensim .mdl files
+│   ├── python/               # Python simulation code
+│   └── dashboard/            # Streamlit dashboard
+├── examples/                 # Simulation examples
+├── CONTRIBUTING.md           # Contribution guidelines
+├── LICENSE                   # MIT License
+└── .github/
+    ├── ISSUE_TEMPLATE/       # Issue templates
+    └── PULL_REQUEST_TEMPLATE.md
