@@ -1,0 +1,51 @@
+"""
+مدل هیبرید هارمونی تحول‌گرا - سرات‌نت ۱۴۰۵
+Vensim-compatible simulation engine
+"""
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def iran_hybrid_leadership(T=50, dt=0.1):
+    """شبیه‌سازی کامل مدل هیبرید"""
+    
+    # پارامترهای کالیبره‌شده ایران ۱۴۰۴
+    state = {
+        'J': 0.62,  # عدالت
+        'S': 0.70,  # ثبات  
+        'U': 0.25,  # ناآرامی
+        'C': 0.68,  # شایستگی
+        'L': 0.35,  # وفاداری
+        'ren': 0.64 # مهربانی کنفوسیوس
+    }
+    
+    history = [state.copy()]
+    
+    for t in range(T):
+        # R-loop 1: ren کنفوسیوس (انسانیت→ثبات)
+        state['S'] += (0.42*state['ren']*state['J'] - 0.22*state['U']) * dt
+        
+        # R-loop 2: تحول‌گرا غربی (LMX→وفاداری)
+        state['L'] = 0.35*state['J'] + 0.28*state['S'] + 0.22*0.45
+        
+        # B-loop: شوری امام علی (مشورت→شایستگی)
+        state['C'] += 0.18*(state['L'] + 0.3*0.7 - state['U']) * dt
+        
+        # Bounds [0,1]
+        for key in state:
+            state[key] = np.clip(state[key], 0, 1)
+            
+        history.append(state.copy())
+        
+        # شرط بهینگی
+        if state['S'] > 0.85 and state['U'] < 0.12 and t > 25:
+            print(f"✅ بهینگی: تکرار {t}, ثبات={state['S']:.2f}")
+            break
+    
+    return pd.DataFrame(history)
+
+# اجرا
+if __name__ == "__main__":
+    results = iran_hybrid_leadership()
+    print(results.tail())
